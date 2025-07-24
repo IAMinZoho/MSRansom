@@ -421,7 +421,7 @@ $timer.Add_Tick({
 
 # Timer for delayed explorer.exe termination
 $explorerTimer = New-Object System.Windows.Forms.Timer
-$explorerTimer.Interval = 25000 # 25 seconds
+$explorerTimer.Interval = 40000 # 40 seconds
 $explorerTimer.Add_Tick({
     Disable-ExplorerAutoRestart -Action Disable
     Stop-Explorer
