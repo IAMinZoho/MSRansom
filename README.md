@@ -1,2 +1,4 @@
 # MSRansom
 MSiRig Ransomware
+
+DO NOT EDIT THIS REPOSITORY AS THIS IS CONNECTED TO MSiRIG and Girism.
