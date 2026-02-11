@@ -1,9 +1,18 @@
-# MSRansom
-MSiRig Ransomware
+# MSRansom / MSiRig Ransomware
 
-**To re-enable Task Manager:**
-HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System -->DisableTaskMgr --> Set to 0 is re-enable Task manager
+A repository dedicated to the analysis and recovery steps for the **MSiRiG** and **Girism** ransomware strains.
 
-**DO NOT EDIT THIS REPOSITORY AS THIS IS CONNECTED TO MSiRiG and Girism.**
+---
 
-_If you need a fake ransomware exe that just shows a dark screen with timer, then use :_ https://github.com/v3gard/FakeRansomware
+## 🛠 Recovery: Re-enabling Task Manager
+If the ransomware has disabled your Task Manager, you can manually restore access by modifying the Windows Registry.
+
+**Registry Path:** `HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System`  
+**Value Name:** `DisableTaskMgr`  
+**Action:** Set to `0` to re-enable.
+
+### Automated PowerShell Fix
+Run the following command in a PowerShell window to immediately re-enable access:
+
+```powershell
+Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "DisableTaskMgr" -Value 0
