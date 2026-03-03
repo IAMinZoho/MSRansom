@@ -24,4 +24,4 @@ DO NOT EDIT THIS REPOSITORY
 This project is strictly connected to the MSiRiG and Girism ecosystems. Unauthorized changes or edits may disrupt ongoing research, connectivity, or data integrity.
 
 MSRansom-stealth.ps1:
-We have a excel file that has the infected macro which will create a PS session and IEX to MSRansom-stealth.ps1 raw github link. This excel should be run on WSServer and C2server should be on WSClient. 
+We have a excel file (Financial Report.xls) that has the infected macro which will create a PS session and IEX to MSRansom-stealth.ps1 raw github link. This excel should be run on WSServer and C2server should be on WSClient. 
